@@ -1,4 +1,5 @@
 public enum PieceType {
+    NONE,
     PAWN,
     ROOK,
     BISHOP,
