@@ -36,7 +36,7 @@ public class Board {
     }
 
     public void addPiece(Piece piece, int row, int col) {
-        if (row < 0 || row > rows || col < 0 || col > columns) {
+        if (row < 0 || row >= rows || col < 0 || col >= columns) {
             throw new ArrayIndexOutOfBoundsException();
         }
 

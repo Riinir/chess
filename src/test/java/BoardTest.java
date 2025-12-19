@@ -3,7 +3,87 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTest {
     @Test
-    void addOnePawn() {
+    void addPieceLastRowAndCol() {
+        Board board = new Board(8, 8);
+        Pawn pawn = new Pawn(PieceColour.WHITE);
+        board.addPiece(pawn, 7, 7);
+
+        Assertions.assertSame(pawn, board.getGrid()[7][7].getCurrentPiece());
+    }
+    @Test
+    void addPieceFirstRowAndCol() {
+        Board board = new Board(8, 8);
+        Pawn pawn = new Pawn(PieceColour.WHITE);
+        board.addPiece(pawn, 0, 0);
+
+        Assertions.assertSame(pawn, board.getGrid()[0][0].getCurrentPiece());
+    }
+
+    @Test
+    void addPieceRowLessThanZero() {
+        Board board = new Board();
+
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> board.addPiece(new Pawn(PieceColour.WHITE), -1, 2));
+    }
+    @Test
+    void addPieceRowEqualToNumRows() {
+        Board board = new Board(8, 8);
+
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> board.addPiece(new Pawn(PieceColour.WHITE), 8, 2));
+    }
+    @Test
+    void addPieceRowGreaterThanNumRows() {
+        Board board = new Board(8, 8);
+
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> board.addPiece(new Pawn(PieceColour.WHITE), 9, 2));
+    }
+
+    @Test
+    void addPieceColLessThanZero() {
+        Board board = new Board();
+
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> board.addPiece(new Pawn(PieceColour.WHITE), 2, -1));
+    }
+    @Test
+    void addPieceColEqualToNumCols() {
+        Board board = new Board(8, 8);
+
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> board.addPiece(new Pawn(PieceColour.WHITE), 2, 8));
+    }
+    @Test
+    void addPieceColGreaterThanNumCols() {
+        Board board = new Board(8, 8);
+
+        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> board.addPiece(new Pawn(PieceColour.WHITE), 2, 9));
+    }
+
+    @Test
+    void displayEmptyBoard() {
+        Board board = new Board();
+
+        String expected =
+                """
+                | | | | | | | | |
+                | | | | | | | | |
+                | | | | | | | | |
+                | | | | | | | | |
+                | | | | | | | | |
+                | | | | | | | | |
+                | | | | | | | | |
+                | | | | | | | | |
+                """;
+        String actual = board.getGridString();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    void displayOnePawn() {
         Board board = new Board();
         Pawn pawn = new Pawn(PieceColour.WHITE);
         board.addPiece(pawn, 0, 0);
@@ -23,9 +103,8 @@ public class BoardTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
     @Test
-    void addNonePiece() {
+    void displayNonePiece() {
         Board board = new Board();
         Piece none = NonePiece.getInstance();
         board.addPiece(none, 5, 5);
@@ -45,9 +124,8 @@ public class BoardTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
     @Test
-    void addFullLineup() {
+    void displayFullLineup() {
         Board board = new Board();
         for (int i = 0; i < 8; i++) {
             board.addPiece(new Pawn(PieceColour.WHITE), 1, i);
@@ -90,7 +168,7 @@ public class BoardTest {
     }
 
     @Test
-    void fillEntireBoard() {
+    void fillAndDisplayEntireBoard() {
         Board board = new Board();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
