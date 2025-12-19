@@ -23,7 +23,8 @@ public abstract class Piece {
         currentPosition.setPosition(newPosition);
     }
 
-    // Returns a list of positions according to the currentPosition
-    //  of the piece as well as its specific move set
+    // Returns a list of all possible positions according to both the
+    //  currentPosition of the piece and its specific move set
+    // The pieces do not validate their own moves, they only give the list of all possible moves
     protected abstract ArrayList<Position> getAllMoves();
 }
