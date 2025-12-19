@@ -23,7 +23,7 @@ public abstract class Piece {
         currentPosition.setPosition(newPosition);
     }
 
-    // This method returns a list of positions according to the currentPosition
+    // Returns a list of positions according to the currentPosition
     //  of the piece as well as its specific move set
     protected abstract ArrayList<Position> getAllMoves();
 }
