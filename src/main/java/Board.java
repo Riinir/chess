@@ -41,7 +41,17 @@ public class Board {
         }
 
         // Add the piece to the boardCell at the row and column
+        piece.setCurrentPosition(row, col);
         grid[row][col].setCurrentPiece(piece);
+    }
+    public void addPiece(Piece piece, Position p) {
+        if (p.getRow() < 0 || p.getRow() >= rows || p.getCol() < 0 || p.getCol() >= columns) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        // Add the piece to the boardCell at the row and column
+        piece.setCurrentPosition(p);
+        grid[p.getRow()][p.getCol()].setCurrentPiece(piece);
     }
 
     public String getGridString() {
@@ -69,7 +79,7 @@ public class Board {
         return sb.toString();
     }
 
-    private char getPieceChar(Piece piece) {
+    private static char getPieceChar(Piece piece) {
         return switch (piece.getType()) {
             case PAWN -> 'P';
             case ROOK -> 'R';
