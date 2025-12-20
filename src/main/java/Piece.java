@@ -8,6 +8,7 @@ public abstract class Piece {
     protected Piece(PieceType type, PieceColour colour) {
         this.type = type;
         this.colour = colour;
+        this.currentPosition = new Position();
     }
 
     public PieceType getType() {
@@ -18,6 +19,9 @@ public abstract class Piece {
     }
     public Position getCurrentPosition() {
         return currentPosition;
+    }
+    public void setCurrentPosition(int row, int col) {
+        currentPosition.setPosition(row, col);
     }
     public void setCurrentPosition(Position newPosition) {
         currentPosition.setPosition(newPosition);
